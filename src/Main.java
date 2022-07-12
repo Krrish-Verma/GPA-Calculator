@@ -53,7 +53,7 @@ public class Main {
         System.out.println("Hello! Welcome to the GPA calculator.");
 
         for (int i = 0; i < 7; i++) {
-            System.out.println("Please enter 1 for Regular class[ 4.0 GPA], 2 for Honors class [4.5 GPA, and 3 for AP class [5.0 GPA]: ");
+            System.out.println("Please enter 1 for Regular class[ 4.0 GPA], 2 for Honors class[4.5 GPA], and 3 for AP class[5.0 GPA]: ");
             int typeOfClass = sc.nextInt();
 
             while (typeOfClass > 3 || typeOfClass < 1) {
