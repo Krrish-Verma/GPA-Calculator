@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class GPA {
     public static double getGPA(int classType, int grade) {
         if (classType == 1) {
             if (grade >= 97) return 4;
@@ -50,10 +50,10 @@ public class Main {
         double gpa = 0;
         double maxGPA = 0;
 
-        System.out.println("Hello! Welcome to the GPA calculator.");
+        System.out.println("Hello! Welcome to the PISD GPA calculator.");
 
         for (int i = 0; i < 7; i++) {
-            System.out.println("Please enter 1 for Regular class[ 4.0 GPA], 2 for Honors class [4.5 GPA, and 3 for AP class [5.0 GPA]: ");
+            System.out.println("Please enter 1 for Regular class, 2 for Honors class, and 3 for AP class: ");
             int typeOfClass = sc.nextInt();
 
             while (typeOfClass > 3 || typeOfClass < 1) {
