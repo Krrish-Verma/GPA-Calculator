@@ -62,10 +62,11 @@ public class Main {
         double gpa = 0, maxGPA = 0, unweighted, cbGPA = 0;
         String[] options = {"Regular", "Honors", "AP"};
 
-        JOptionPane.showOptionDialog(null,
+        int e = JOptionPane.showOptionDialog(null,
                 "Hello! Welcome to the GPA calculator.\nContinue?",
                 "GPA Calculator",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Okay"}, new String[]{"Okay"}[0]);
+        if (e == JOptionPane.CLOSED_OPTION) System.exit(0);
 
         for (int i = 0; i < 7; i++) {
             int typeOfClass = JOptionPane.showOptionDialog(null,
