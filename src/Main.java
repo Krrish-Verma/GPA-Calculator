@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+
     public static double getGPA(int classType, int grade) {
         if (classType == 1) {
             if (grade >= 97) return 4;
