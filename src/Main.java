@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import javax.swing.*;
 
 public class Main {
     public static double getGPA(int classType, int grade, boolean cb) {
@@ -13,7 +13,7 @@ public class Main {
             else if (grade >= 70) return 1.7;
             else return 0;
         } else {
-            if (classType == 1) {
+            if (classType == 0) {
                 if (grade >= 97) return 4;
                 else if (grade >= 93) return 3.8;
                 else if (grade >= 90) return 3.6;
@@ -26,7 +26,7 @@ public class Main {
                 else if (grade >= 70) return 2;
                 else return 0;
             }
-            if (classType == 2) {
+            if (classType == 1) {
                 if (grade >= 97) return 4.5;
                 else if (grade >= 93) return 4.3;
                 else if (grade >= 90) return 4.1;
@@ -39,7 +39,7 @@ public class Main {
                 else if (grade >= 70) return 2.5;
                 else return 0;
             }
-            if (classType == 3) {
+            if (classType == 2) {
                 if (grade >= 97) return 5;
                 else if (grade >= 93) return 4.8;
                 else if (grade >= 90) return 4.6;
@@ -58,32 +58,39 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        JTextField gradeField = new JTextField();
         double gpa = 0;
         double maxGPA = 0;
         double cbGPA = 0;
+        String[] options = {"Regular", "Honors", "AP"};
 
-        System.out.println("Hello! Welcome to the GPA calculator.");
+        JOptionPane.showOptionDialog(null,
+                "Hello! Welcome to the GPA calculator.\nContinue?",
+                "GPA Calculator",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Okay"}, new String[]{"Okay"}[0]);
 
         for (int i = 0; i < 7; i++) {
-            System.out.println("Please enter 1 for Regular class[ 4.0 GPA], 2 for Honors class[4.5 GPA], and 3 for AP class[5.0 GPA]: ");
-            int typeOfClass = sc.nextInt();
+            int typeOfClass = JOptionPane.showOptionDialog(null,
+                    "Please choose your class type: ",
+                    "GPA Calculator",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
-            while (typeOfClass > 3 || typeOfClass < 1) {
-                System.out.println("Invalid input! Please re-enter the type of class: ");
-                typeOfClass = sc.nextInt();
+            int grade = JOptionPane.showConfirmDialog(null, new Object[] {"Grade:", gradeField}, "Please enter your grade:", JOptionPane.OK_CANCEL_OPTION);
+            if (grade == JOptionPane.OK_OPTION) {
+                gpa += getGPA(typeOfClass, Integer.parseInt(gradeField.getText()), false);
+                maxGPA += getGPA(typeOfClass, 100, false);
+                cbGPA += getGPA(typeOfClass, Integer.parseInt(gradeField.getText()), true);
+                gradeField = new JTextField();
             }
-
-            System.out.println("Please enter the grade in the class: ");
-            int grade = sc.nextInt();
-            gpa += getGPA(typeOfClass, grade, false);
-            maxGPA += getGPA(typeOfClass, 100, false);
-            cbGPA += getGPA(typeOfClass, grade, true);
         }
 
-        System.out.printf("Your weighted GPA is %.2f\n", (gpa / 7));
-        System.out.printf("Your unweighted GPA is %.2f\n", (gpa / maxGPA) * 4.0);
-        System.out.printf("Your CollegeBoard GPA is %.2f\n", (cbGPA / 7));
+        gpa = gpa/7;
+        double unweighted = gpa/(maxGPA/7)*4.0;
+        cbGPA = cbGPA/7;
 
+
+        JOptionPane.showMessageDialog(null, "Your weighted GPA is " + gpa +
+                "\nYour unweighted GPA is " + unweighted +
+                "\nYour CollegeBoard GPA is " + cbGPA);
     }
 }
