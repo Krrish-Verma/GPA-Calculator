@@ -59,9 +59,7 @@ public class Main {
 
     public static void main(String[] args) {
         JTextField gradeField = new JTextField();
-        double gpa = 0;
-        double maxGPA = 0;
-        double cbGPA = 0;
+        double gpa = 0, maxGPA = 0, unweighted, cbGPA = 0;
         String[] options = {"Regular", "Honors", "AP"};
 
         JOptionPane.showOptionDialog(null,
@@ -85,12 +83,11 @@ public class Main {
         }
 
         gpa = gpa/7;
-        double unweighted = gpa/(maxGPA/7)*4.0;
+        unweighted = gpa/(maxGPA/7)*4.0;
         cbGPA = cbGPA/7;
 
-
-        JOptionPane.showMessageDialog(null, "Your weighted GPA is " + gpa +
-                "\nYour unweighted GPA is " + unweighted +
-                "\nYour CollegeBoard GPA is " + cbGPA);
+        JOptionPane.showMessageDialog(null, "Your weighted GPA is " + String.format("%.2f", gpa) +
+                "\nYour unweighted GPA is " + String.format("%.2f", unweighted) +
+                "\nYour CollegeBoard GPA is " + String.format("%.2f", cbGPA));
     }
 }
