@@ -58,7 +58,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        JTextField gradeField = new JTextField();
+        JTextField gradeField = new JTextField(), classesField = new JTextField();
         double gpa = 0, maxGPA = 0, unweighted, cbGPA = 0;
         String[] options = {"Regular", "Honors", "AP"};
 
@@ -68,7 +68,23 @@ public class Main {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new String[]{"Okay"}, new String[]{"Okay"}[0]);
         if (e == JOptionPane.CLOSED_OPTION) System.exit(0);
 
-        for (int i = 0; i < 7; i++) {
+        int classNum = JOptionPane.showConfirmDialog(null, new Object[]{"Number of classes:", classesField}, "Please enter the number of classes:", JOptionPane.OK_CANCEL_OPTION);
+        if (classNum != JOptionPane.OK_OPTION) main(new String[]{});
+
+        boolean error = true;
+        while (error) {
+            try {
+                Integer.parseInt(classesField.getText());
+                error = false;
+            } catch (NumberFormatException nfe) {
+                classNum = JOptionPane.showConfirmDialog(null, new Object[]{"Number of classes:", classesField}, "Please enter the number of classes:", JOptionPane.OK_CANCEL_OPTION);
+                if (classNum != JOptionPane.OK_OPTION) main(new String[]{});
+            }
+        }
+
+        int classes = Integer.parseInt(classesField.getText());
+
+        for (int i = 0; i < classes; i++) {
             int typeOfClass = JOptionPane.showOptionDialog(null,
                     "Please choose your class type: ",
                     "GPA Calculator",
@@ -77,7 +93,7 @@ public class Main {
             int grade = JOptionPane.showConfirmDialog(null, new Object[]{"Grade:", gradeField}, "Please enter your grade:", JOptionPane.OK_CANCEL_OPTION);
             if (grade != JOptionPane.OK_OPTION) main(new String[]{});
 
-            boolean error = true;
+            error = true;
             while (error) {
                 try {
                     Integer.parseInt(gradeField.getText());
@@ -96,9 +112,9 @@ public class Main {
             }
         }
 
-        gpa = gpa/7;
-        unweighted = gpa/(maxGPA/7)*4.0;
-        cbGPA = cbGPA/7;
+        gpa = gpa/classes;
+        unweighted = gpa/(maxGPA/classes)*4.0;
+        cbGPA = cbGPA/classes;
 
         JOptionPane.showMessageDialog(null, "Your weighted GPA is " + String.format("%.2f", gpa) +
                 "\nYour unweighted GPA is " + String.format("%.2f", unweighted) +
